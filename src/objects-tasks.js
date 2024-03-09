@@ -57,8 +57,16 @@ function mergeObjects(objects) {
  *    removeProperties({name: 'John', age: 30, city: 'New York'}, 'age') => {name: 'John', city: 'New York'}
  *
  */
-function removeProperties(/* obj, keys */) {
-  throw new Error('Not implemented');
+function removeProperties(obj, keys) {
+  const a = {};
+  Object.assign(a, obj);
+  Object.keys(a).forEach((key) => {
+    if (keys.includes(key)) {
+      delete a[key];
+    }
+  });
+
+  return a;
 }
 
 /**
@@ -146,8 +154,22 @@ function makeWord(lettersObject) {
  *    sellTickets([25, 25, 50]) => true
  *    sellTickets([25, 100]) => false (The seller does not have enough money to give change.)
  */
-function sellTickets(/* queue */) {
-  throw new Error('Not implemented');
+function sellTickets(queue) {
+  let cass = 0;
+  const ticketPrice = 25;
+  let answer = true;
+  queue.forEach((cash) => {
+    if (cash > ticketPrice && cass < cash) {
+      answer = false;
+    }
+    if (cash > ticketPrice) {
+      cass += ticketPrice - cash;
+    } else {
+      cass += ticketPrice;
+    }
+  });
+
+  return answer;
 }
 
 /**
